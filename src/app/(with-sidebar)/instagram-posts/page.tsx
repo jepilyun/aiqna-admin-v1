@@ -1,0 +1,93 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { FormSearchBox } from "@/components/form/form-search-box";
+import ListPagination from "@/components/common/list-pagination";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import { toast } from "sonner";
+import { LIST_LIMIT, TSqlInstagramPostList } from "aiqna_common_v1";
+import { reqInstagramPostGetList } from "@/requests/req-admin/req-instagram-post";
+import { TableInstagramPostList, TableInstagramPostListRow } from "@/components/instagram-post/table-instagram-post-list";
+
+/**
+ * Instagram Post 목록 페이지
+ * @returns Instagram Post 목록 페이지
+ */
+export default function InstagramPostList() {
+  const router = useRouter();
+  const [data, setData] = useState<TSqlInstagramPostList[]>([]);
+  const [start, setStart] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [cache, setCache] = useState<Record<string, TSqlInstagramPostList[]>>({});
+  const [keyword, setKeyword] = useState<string>("");
+
+  // 캐시 키 useMemo 처리
+  const cacheKey = useMemo(() => `InstagramPost_${start}`, [start]);
+
+  useEffect(() => {
+    if (cache[cacheKey]) {
+      setData(cache[cacheKey]);
+      return;
+    }
+
+    const fetchData = async () => {
+      const apiResponse = await reqInstagramPostGetList(start);
+
+      if (apiResponse.success && apiResponse.dbResponse?.data && apiResponse.dbResponse?.data.length > 0) {
+        const { data: instagramPosts, count } = apiResponse.dbResponse;
+        setData(instagramPosts || []);
+        setCache((prev) => ({ ...prev, [cacheKey]: instagramPosts || [] }));
+        setTotalPages(Math.ceil((count || 0) / LIST_LIMIT.default));
+      } else if (apiResponse.success && apiResponse.dbResponse?.data && apiResponse.dbResponse?.data.length === 0) {
+        setData([]);
+        toast.error("Response Success but Instagram Post data does not exist. Please check the data.");
+      } else {
+        toast.error(apiResponse.alarm || apiResponse.msg || "Error");
+        setData([]);
+      }
+    };
+
+    fetchData();
+  }, [cacheKey]);
+
+  const handleSearch = (value: string | null | undefined) => {
+    if (value && value.length > 0) {
+      router.push(`/instagram-posts/search/${value}`);
+    } else {
+      toast.error("Please enter a search keyword.");
+    }
+  };
+
+  const rows = useMemo(() => {
+    return data.map((item) => <TableInstagramPostListRow key={item.uuid_36} instagramPost={item} />);
+  }, [data]);
+
+  return (
+    <div className="mt-4 max-w-full">
+      <div className="flex items-center justify-end mb-4">
+        <div className="flex items-center gap-2">
+          <FormSearchBox
+            info={{ id: "search-input", label: "Search", placeholder: "Search", is_required: false }}
+            value={keyword}
+            onChange={(value) => setKeyword(value)}
+            search={handleSearch}
+          />
+          <Link href="/instagram-posts/register" className="flex items-center justify-center">
+            <Button variant="outline">
+              <Plus />
+            </Button>
+          </Link>
+        </div>
+      </div>
+      <div className="overflow-x-auto custom-scrollbar">
+        <TableInstagramPostList renderedRows={rows} />
+      </div>
+      <ListPagination start={start} total={totalPages} setStart={setStart} />
+    </div>
+  );
+}
