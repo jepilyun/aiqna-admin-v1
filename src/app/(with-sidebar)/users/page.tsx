@@ -21,13 +21,13 @@ import { LIST_LIMIT, TAdmin } from "aiqna_common_v1";
 export default function AdministratorList() {
   const router = useRouter();
   const [data, setData] = useState<TAdmin[]>([]);
-  const [page, setPage] = useState(1);
+  const [start, setStart] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [cache, setCache] = useState<Record<string, TAdmin[]>>({});
   const [keyword, setKeyword] = useState<string>("");
 
   // 캐시 키 useMemo 처리
-  const cacheKey = useMemo(() => `Administrator_${page}`, [page]);
+  const cacheKey = useMemo(() => `Administrator_${start}`, [start]);
 
   useEffect(() => {
     if (cache[cacheKey]) {
@@ -36,7 +36,7 @@ export default function AdministratorList() {
     }
 
     const fetchData = async () => {
-      const apiResponse = await reqAdminGetList(page);
+      const apiResponse = await reqAdminGetList(start);
 
       if (apiResponse.success && apiResponse.dbResponse?.data && apiResponse.dbResponse?.data.length > 0) {
         const { data: administrators, count } = apiResponse.dbResponse;
@@ -87,7 +87,7 @@ export default function AdministratorList() {
       <div className="overflow-x-auto custom-scrollbar">
         <TableAdministratorList renderedRows={rows} />
       </div>
-      <ListPagination page={page} totalPages={totalPages} setPage={setPage} />
+      <ListPagination start={start} total={totalPages} setStart={setStart} />
     </div>
   );
 }

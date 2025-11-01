@@ -26,7 +26,7 @@ export default function TextRegister() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (data.hash_key) {
+    if (data.content) {
       const result = await reqTextRegister(data);
 
       if (result.success) {
@@ -36,8 +36,8 @@ export default function TextRegister() {
         toast.error(result.error || result.alarm || result.msg || "Error");
       }
     } else {
-      if (!data.hash_key) {
-        toast.error("Hash Key is required");
+      if (!data.content) {
+        toast.error("Content is required");
       }
     }
   };

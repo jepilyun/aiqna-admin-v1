@@ -1,4 +1,3 @@
-
 // 타입 정의 추가
 type SubMenuItem = {
   title: string;
@@ -12,7 +11,6 @@ type MenuItem = {
   icon?: React.ComponentType<{ className?: string }>;
   children?: SubMenuItem[];
 };
-
 
 // menu-config.ts
 export const ADMIN_MENU_ITEMS: MenuItem[] = [

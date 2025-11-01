@@ -5,7 +5,10 @@
  * @returns modified data
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getOnlyModifiedData = <T extends Record<string, any>>(original: Partial<T>, updated: Partial<T>): Partial<T> => {
+export const getOnlyModifiedData = <T extends Record<string, any>>(
+  original: Partial<T>,
+  updated: Partial<T>,
+): Partial<T> => {
   const result: Partial<T> = {};
 
   Object.keys(updated).forEach((key) => {

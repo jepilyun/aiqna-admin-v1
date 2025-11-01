@@ -13,19 +13,19 @@ export const apiUrlInstagramPost = (
 
   switch (type) {
     case "list":
-      path = `/api/admin/instagram-post/list/${optionalParams?.start ? optionalParams?.start : 0}`;
+      path = `/api/admin/instagram/list/${optionalParams?.start ? optionalParams?.start : 0}`;
       break;
     case "register":
-      path = "/api/admin/instagram-post/register";
+      path = "/api/admin/instagram/register";
       break;
     case "detail":
-      path = `/api/admin/instagram-post/detail/${optionalParams?.uuid36}`;
+      path = `/api/admin/instagram/detail/${optionalParams?.uuid36}`;
       break;
     case "delete":
-      path = `/api/admin/instagram-post/delete/${optionalParams?.uuid36}`;
+      path = `/api/admin/instagram/delete/${optionalParams?.uuid36}`;
       break;
     case "update":
-      path = `/api/admin/instagram-post/update/${optionalParams?.uuid36}`;
+      path = `/api/admin/instagram/update/${optionalParams?.uuid36}`;
       break;
     default:
       console.error(`Invalid route: ${type}`);

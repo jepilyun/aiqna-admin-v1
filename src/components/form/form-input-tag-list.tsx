@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { TFormFieldProps } from "trand_common_v1";
+import { TFormFieldProps } from "aiqna_common_v1";
 
 import { Button } from "../ui/button";
 

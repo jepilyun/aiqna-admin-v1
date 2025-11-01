@@ -23,13 +23,13 @@ export default function AdministratorSearch({ params }: { params: Promise<{ sear
   const { searchKeyword } = use(params);
   const router = useRouter();
   const [data, setData] = useState<TAdmin[]>([]);
-  const [page, setPage] = useState(1);
+  const [start, setStart] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [keyword, setKeyword] = useState<string>(decodeURIComponent(searchKeyword));
 
   useEffect(() => {
     const fetchData = async () => {
-      const apiResponse = await reqAdminSearchByKeyword(keyword, page);
+      const apiResponse = await reqAdminSearchByKeyword(keyword, start);
 
       if (apiResponse.success && apiResponse.dbResponse?.data && apiResponse.dbResponse?.data.length > 0) {
         const { data: administrators, count } = apiResponse.dbResponse;
@@ -84,7 +84,7 @@ export default function AdministratorSearch({ params }: { params: Promise<{ sear
       <div className="overflow-x-auto custom-scrollbar">
         <TableAdministratorList renderedRows={rows} />
       </div>
-      <ListPagination page={page} totalPages={totalPages} setPage={setPage} />
+      <ListPagination start={start} total={totalPages} setStart={setStart} />
     </div>
   );
 }

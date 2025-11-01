@@ -84,7 +84,7 @@ export default function AdministratorSearch({ params }: { params: Promise<{ sear
       <div className="overflow-x-auto custom-scrollbar">
         <TableAdministratorList renderedRows={rows} />
       </div>
-      <ListPagination page={page} totalPages={totalPages} setPage={setPage} />
+      <ListPagination start={page} total={totalPages} setStart={setPage} />
     </div>
   );
 }

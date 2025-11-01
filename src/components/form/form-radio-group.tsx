@@ -1,7 +1,7 @@
 // components/form/LabeledRadioGroup.tsx
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { TFormFieldProps } from "trand_common_v1";
+import { TFormFieldProps } from "aiqna_common_v1";
 
 import { Button } from "../ui/button";
 

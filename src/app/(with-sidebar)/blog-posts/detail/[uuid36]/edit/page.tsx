@@ -73,9 +73,7 @@ export default function BlogPostDetailEdit({ params }: { params: Promise<{ uuid3
       <PageTitle title="Edit Blog Post" />
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-5xl mx-auto">
         <FormInput info={F_BLOG_POST.uuid_36} value={currentData?.uuid_36 || ""} disabled />
-        <FormInput info={F_BLOG_POST.blog_post_url} value={updatedData?.blog_post_url || ""} 
-          onChange={(value) => handleFieldsChange(F_BLOG_POST.blog_post_url.id as keyof TSqlBlogPostDetailUpdate, value)}
-        />
+        <FormInput info={F_BLOG_POST.blog_post_url} value={currentData?.blog_post_url} disabled/>
         <FormInput info={F_BLOG_POST.title} value={updatedData?.title || ""} 
           onChange={(value) => handleFieldsChange(F_BLOG_POST.title.id as keyof TSqlBlogPostDetailUpdate, value)}
         />

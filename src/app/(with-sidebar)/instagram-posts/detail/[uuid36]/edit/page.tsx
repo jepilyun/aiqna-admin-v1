@@ -73,7 +73,7 @@ export default function InstagramPostDetailEdit({ params }: { params: Promise<{ 
       <PageTitle title="Edit Instagram Post" />
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-5xl mx-auto">
         <FormInput info={F_INSTAGRAM_POST.uuid_36} value={currentData?.uuid_36 || ""} disabled />
-        <FormInput info={F_INSTAGRAM_POST.instagram_post_url} value={updatedData?.instagram_post_url || ""} 
+        <FormInput info={F_INSTAGRAM_POST.instagram_post_url} value={currentData?.instagram_post_url || ""} 
           onChange={(value) => handleFieldsChange(F_INSTAGRAM_POST.instagram_post_url.id as keyof TSqlInstagramPostDetailUpdate, value)}
         />
         <FormInput info={F_INSTAGRAM_POST.post_type} value={updatedData?.post_type || ""} 

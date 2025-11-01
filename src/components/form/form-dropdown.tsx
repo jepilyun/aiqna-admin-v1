@@ -1,7 +1,7 @@
 // components/form/LabeledDropdown.tsx
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { TFormFieldProps } from "trand_common_v1";
+import { TFormFieldProps } from "aiqna_common_v1";
 
 interface FormDropdownProps {
   info: TFormFieldProps;

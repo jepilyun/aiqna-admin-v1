@@ -1,7 +1,7 @@
 // components/form/LabeledTextarea.tsx
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { TFormFieldProps } from "trand_common_v1";
+import { TFormFieldProps } from "aiqna_common_v1";
 
 import { Button } from "../ui/button";
 

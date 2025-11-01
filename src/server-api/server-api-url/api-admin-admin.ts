@@ -6,7 +6,13 @@ import { APIUrlOptionalParams } from "../api-common";
  * @returns 경로
  */
 export const apiUrlAdminAdmin = (
-  type: "list" | "search" | "create" | "detailGet" | "detailUpdate" | "detailDelete",
+  type:
+    | "list"
+    | "search"
+    | "create"
+    | "detailGet"
+    | "detailUpdate"
+    | "detailDelete",
   optionalParams?: APIUrlOptionalParams,
 ) => {
   let path = "";
