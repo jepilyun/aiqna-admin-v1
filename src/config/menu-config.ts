@@ -55,6 +55,10 @@ export const ADMIN_MENU_ITEMS: MenuItem[] = [
     url: "/youtube-channels",
   },
   {
+    title: "QnA",
+    url: "/qna",
+  },
+  {
     title: "Users",
     url: "/users",
   },
